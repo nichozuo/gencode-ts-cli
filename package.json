@@ -1,18 +1,26 @@
 {
-  "name": "gencode-ts-cli",
-  "version": "0.0.1",
-  "description": "",
+  "name": "@nichozuo/gencode-ts-cli",
+  "version": "1.0.0",
+  "description": "A CLI tool to generate TypeScript code from OpenAPI specification",
   "main": "dist/index.js",
+  "bin": {
+    "gencode-ts": "dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "test": "node dist/index.js",
     "build": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js --format=cjs --minify --minify-identifiers"
   },
-  "keywords": [],
+  "keywords": [
+    "openapi",
+    "typescript",
+    "code-generator",
+    "cli"
+  ],
   "author": "zuoge",
   "license": "ISC",
-  "bin": {
-    "gencode-ts": "dist/index.js"
-  },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
     "@swc/cli": "0.4.1-nightly.20240914",
@@ -29,7 +37,7 @@
     "typescript-eslint": "^8.12.1"
   },
   "dependencies": {
-    "commander": "^13.0.0",
+    "commander": "^11.1.0",
     "node-fetch": "^3.3.2",
     "openapi-typescript": "^7.4.2",
     "radash": "^12.1.0"
