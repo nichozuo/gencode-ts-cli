@@ -15,26 +15,26 @@ const configDir = options.configDir || './';
 
 (async () => {
   // 加载和解析配置文件
-  const config = getConfig(configDir);
+  const config = getConfig({ configDir });
 
   // 删除老的文件
-  deleteOldFiles(config, configDir);
+  deleteOldFiles({ config, configDir });
 
   // 请求 openapi
-  const openapi = await fetchOpenApi(config);
+  const openapi = await fetchOpenApi({ config });
 
   // 把扁平结构，变成树形结构
-  const nestedStructure = createNestedStructure(openapi);
+  const nestedStructure = createNestedStructure({ openapi });
 
   // 生成接口信息
-  const nestedApis = createNestedApis(openapi, nestedStructure);
+  const nestedApis = createNestedApis({ openapi, nestedStructure });
 
   // 生成接口文件
-  createApisFile(nestedApis, config, configDir);
+  createApisFile({ nestedApis, config, configDir });
 
   // 生成type文件
-  createApiTypesFile(nestedApis, config, configDir);
+  createApiTypesFile({ nestedApis, config, configDir });
 
   // 生成ProEnums文件
-  createEnumsFile(openapi, config, configDir);
+  createEnumsFile({ openapi, config, configDir });
 })();

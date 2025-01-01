@@ -1,0 +1,8 @@
+{
+  "url": "http://0.0.0.0:8000/api/docs/openapi",
+  "module": "Admin",
+  "outPath": "./output",
+  "apis": {
+    "firstLine": "import { MyResponseType } from '@/common'; import { request } from '@umijs/max';"
+  }
+}

@@ -1,7 +1,14 @@
 import { OpenAPI3 } from "openapi-typescript";
 import { pascal } from "radash";
 
-export async function fetchOpenApi(config: ConfigType): Promise<OpenAPI3> {
+/**
+ * 获取 OpenAPI 文档
+ * @param params.config - 配置信息
+ */
+export async function fetchOpenApi(params: {
+    config: ConfigType;
+}): Promise<OpenAPI3> {
+    const { config } = params;
     const response = await fetch(config.url);
     if (!response.ok) {
         throw new Error("Network response was not ok " + response.statusText);
@@ -11,7 +18,14 @@ export async function fetchOpenApi(config: ConfigType): Promise<OpenAPI3> {
     return data as OpenAPI3;
 }
 
-export function createNestedStructure(openapi: OpenAPI3) {
+/**
+ * 创建嵌套的 API 结构
+ * @param params.openapi - OpenAPI 文档对象
+ */
+export function createNestedStructure(params: {
+    openapi: OpenAPI3;
+}): MyTreeNodeType {
+    const { openapi } = params;
     const root: MyTreeNodeType = {};
     openapi.tags?.forEach((tag: { name: string }) => {
         const parts = tag.name.replace(/Controller$/, "").split("/");
@@ -24,10 +38,16 @@ export function createNestedStructure(openapi: OpenAPI3) {
     return root;
 }
 
-export function createNestedApis(
-    openapi: OpenAPI3,
-    nestedStructure: MyTreeNodeType
-) {
+/**
+ * 创建嵌套的 API 信息
+ * @param params.openapi - OpenAPI 文档对象
+ * @param params.nestedStructure - 嵌套的 API 结构
+ */
+export function createNestedApis(params: {
+    openapi: OpenAPI3;
+    nestedStructure: MyTreeNodeType;
+}): MyTreeNodeType {
+    const { openapi, nestedStructure } = params;
     // 读取接口定义
     for (const [path, methods] of Object.entries(openapi.paths ?? {})) {
         for (const [, content] of Object.entries(methods as Record<string, any>)) {
@@ -72,7 +92,11 @@ export function createNestedApis(
     return nestedStructure;
 }
 
-function parsePhpTypeToJsType(typeName: string) {
+/**
+ * 将 PHP 类型转换为 TypeScript 类型
+ * @param typeName - PHP 类型名
+ */
+function parsePhpTypeToJsType(typeName: string): string {
     switch (typeName) {
         case "array":
             return "string[]";

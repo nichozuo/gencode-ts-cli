@@ -1,26 +1,55 @@
 import { OpenAPI3 } from "openapi-typescript";
 import { writeFile } from "./fileUtils";
 
-export function createApisFile(nestedApis: MyTreeNodeType, config: ConfigType, configDir: string) {
+/**
+ * 生成 API 调用文件
+ * @param params.nestedApis - 嵌套的 API 结构
+ * @param params.config - 配置信息
+ * @param params.configDir - 配置文件所在目录
+ */
+export function createApisFile(params: {
+    nestedApis: MyTreeNodeType;
+    config: ConfigType;
+    configDir: string;
+}) {
+    const { nestedApis, config, configDir } = params;
     let content =
         `${config["apis"]["firstLine"]}\n\n` + `export const Apis = {\n`;
     content += _createApisFile(nestedApis[config["module"]], 1);
     content += `}`;
-    writeFile(config, configDir, "Apis.ts", content);
+    writeFile({ config, configDir, fileName: "Apis.ts", fileContent: content });
 }
 
-export function createApiTypesFile(
-    nestedApis: MyTreeNodeType,
-    config: ConfigType,
-    configDir: string
-) {
+/**
+ * 生成 API 类型定义文件
+ * @param params.nestedApis - 嵌套的 API 结构
+ * @param params.config - 配置信息
+ * @param params.configDir - 配置文件所在目录
+ */
+export function createApiTypesFile(params: {
+    nestedApis: MyTreeNodeType;
+    config: ConfigType;
+    configDir: string;
+}) {
+    const { nestedApis, config, configDir } = params;
     let content = `declare namespace ApiTypes {\n`;
     content += _createApiTypesFile(nestedApis[config["module"]], 1);
     content += `}\n`;
-    writeFile(config, configDir, "ApiTypes.d.ts", content);
+    writeFile({ config, configDir, fileName: "ApiTypes.d.ts", fileContent: content });
 }
 
-export function createEnumsFile(openapi: OpenAPI3, config: ConfigType, configDir: string) {
+/**
+ * 生成枚举文件
+ * @param params.openapi - OpenAPI 文档对象
+ * @param params.config - 配置信息
+ * @param params.configDir - 配置文件所在目录
+ */
+export function createEnumsFile(params: {
+    openapi: OpenAPI3;
+    config: ConfigType;
+    configDir: string;
+}) {
+    const { openapi, config, configDir } = params;
     const enums = openapi["x-enum"] as XEnumType | undefined;
     if (enums == undefined) return;
     let data = ``;
@@ -36,9 +65,14 @@ export function createEnumsFile(openapi: OpenAPI3, config: ConfigType, configDir
         });
         data += `};\n\n`;
     }
-    writeFile(config, configDir, "Enums.ts", data);
+    writeFile({ config, configDir, fileName: "Enums.ts", fileContent: data });
 }
 
+/**
+ * 生成 API 调用代码
+ * @param node - API 节点
+ * @param level - 缩进级别
+ */
 function _createApisFile(node: MyTreeNodeType, level: number) {
     let content = "";
     const tab = "  ".repeat(level);
@@ -67,6 +101,11 @@ function _createApisFile(node: MyTreeNodeType, level: number) {
     return content;
 }
 
+/**
+ * 生成 API 类型定义代码
+ * @param node - API 节点
+ * @param level - 缩进级别
+ */
 function _createApiTypesFile(node: MyTreeNodeType, level: number) {
     const tab = "  ".repeat(level);
     let content = "";
