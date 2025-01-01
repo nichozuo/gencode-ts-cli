@@ -1,3 +1,11 @@
+declare module 'openapi-typescript' {
+  export interface OpenAPI3 {
+    tags?: { name: string }[];
+    paths?: Record<string, Record<string, unknown>>;
+    'x-enum'?: XEnumType;
+  }
+}
+
 type ConfigType = {
   url: string;
   module: string;

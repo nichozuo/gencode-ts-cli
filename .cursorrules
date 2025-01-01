@@ -1,0 +1,11 @@
+Always respond in 中文
+
+项目主要是用于读取openapi文件，生成对应的typescript代码，并生成对应的api文档
+
+## 开发框架说明
+- 使用 `pnpm` 管理依赖
+- 使用 `nodejs` 开发
+- 使用 `typescript` 开发
+- 使用 `openapi` 文件生成对应的typescript代码
+
+
