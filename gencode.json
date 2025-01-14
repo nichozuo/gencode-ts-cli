@@ -1,5 +1,5 @@
 {
-  "url": "http://0.0.0.0:8000/api/docs/openapi",
+  "url": "http://localhost:8000/api/docs/openapi",
   "module": "Admin",
   "outPath": "./src/gen/",
   "apis": {

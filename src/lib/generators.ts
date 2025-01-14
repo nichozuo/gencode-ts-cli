@@ -50,17 +50,18 @@ export function createEnumsFile(params: {
     configDir: string;
 }) {
     const { openapi, config, configDir } = params;
-    const enums = openapi["x-enum"] as XEnumType | undefined;
+    const enums = openapi["x-enum"] as XEnumType[];
     if (enums == undefined) return;
     let data = ``;
-    for (const [key, schema] of Object.entries(enums)) {
-        data += `// ${schema.title}\n`;
-        data += `export const ${key}= {\n`;
-        schema.properties.map((prop) => {
-            data += `  '${prop.value}': ${JSON.stringify({
-                text: prop.label,
-                color: prop.color,
-                value: prop.value,
+    for (const schema of enums) {
+        const { name, title, items } = schema;
+        data += `// ${title}\n`;
+        data += `export const ${name} = {\n`;
+        items.forEach((item) => {
+            data += `  '${item.value}': ${JSON.stringify({
+                text: item.text,
+                color: item.color,
+                value: item.value,
             })}, \n`;
         });
         data += `};\n\n`;
