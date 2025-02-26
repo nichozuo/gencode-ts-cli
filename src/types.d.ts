@@ -2,7 +2,7 @@ declare module 'openapi-typescript' {
     export interface OpenAPI3 {
         tags?: { name: string }[];
         paths?: Record<string, Record<string, unknown>>;
-        'x-enum'?: XEnumType[];
+        'x-enum'?: XEnumType;
     }
 }
 
@@ -29,12 +29,15 @@ type MyNodeType = {
     required: string[];
 };
 
-interface XEnumType {
-    name: string;
-    title: string;
-    items: {
-        text: string;
-        value: string;
-        color: string;
-    }[];
+type XEnumType = {
+    [key: string]: {
+        title: string;
+        field: string;
+        properties: {
+            label: string;
+            value: string;
+            color: string;
+            textColor: string;
+        }[];
+    }
 } 

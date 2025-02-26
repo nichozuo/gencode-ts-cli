@@ -50,22 +50,40 @@ export function createEnumsFile(params: {
     configDir: string;
 }) {
     const { openapi, config, configDir } = params;
-    const enums = openapi["x-enum"] as XEnumType[];
+    const enums = openapi["x-enum"] as XEnumType;
     if (enums == undefined) return;
     let data = ``;
-    for (const schema of enums) {
-        const { name, title, items } = schema;
+
+    for (const [name, schema] of Object.entries(enums)) {
+        if (!schema) {
+            console.warn(`警告: 枚举 ${name} 的schema为空`);
+            continue;
+        }
+
+        const { title, properties } = schema;
+        if (!title || !properties) {
+            console.warn(`警告: 枚举 ${name} 缺少title或properties属性`);
+            continue;
+        }
+
         data += `// ${title}\n`;
         data += `export const ${name} = {\n`;
-        items.forEach((item) => {
+
+        properties.forEach((item: { value: string; label: string; color: string; textColor: string }) => {
+            if (!item || !item.value) {
+                console.warn(`警告: 枚举 ${name} 中存在无效的item`);
+                return;
+            }
+
             data += `  '${item.value}': ${JSON.stringify({
-                text: item.text,
-                color: item.color,
+                text: item.label || item.value,
+                color: item.color || '#bfbfbf',
                 value: item.value,
             })}, \n`;
         });
         data += `};\n\n`;
     }
+
     writeFile({ config, configDir, fileName: "Enums.ts", fileContent: data });
 }
 
