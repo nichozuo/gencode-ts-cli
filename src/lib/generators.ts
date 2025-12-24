@@ -1,5 +1,6 @@
 import { OpenAPI3 } from "openapi-typescript";
 import { writeFile } from "./fileUtils";
+import { replace } from "radash";
 
 /**
  * 生成 API 调用文件
@@ -74,12 +75,13 @@ export function createEnumsFile(params: {
                 console.warn(`警告: 枚举 ${name} 中存在无效的item`);
                 return;
             }
-
-            data += `  '${item.value}': ${JSON.stringify({
+            const temp1 = item.value.replace(/\\/g, "\\\\");
+            data += `  '${temp1}': ${JSON.stringify({
                 text: item.label || item.value,
                 color: item.color || '#bfbfbf',
                 value: item.value,
             })}, \n`;
+            data = data.replace('"','\'')
         });
         data += `};\n\n`;
     }

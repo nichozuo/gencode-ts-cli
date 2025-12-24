@@ -2,6 +2,23 @@ import { MyResponseType } from '@/common';
 import { request } from '@umijs/max';
 
 export const Apis = {
+  AccountUsers: {
+    List(data?: ApiTypes.AccountUsers.List): Promise<MyResponseType> {
+      return request('admin/account_users/list', { data });
+    },
+    Store(data: ApiTypes.AccountUsers.Store): Promise<MyResponseType> {
+      return request('admin/account_users/store', { data });
+    },
+    Update(data: ApiTypes.AccountUsers.Update): Promise<MyResponseType> {
+      return request('admin/account_users/update', { data });
+    },
+    Show(data: ApiTypes.AccountUsers.Show): Promise<MyResponseType> {
+      return request('admin/account_users/show', { data });
+    },
+    Delete(data: ApiTypes.AccountUsers.Delete): Promise<MyResponseType> {
+      return request('admin/account_users/delete', { data });
+    },
+  },
   Admins: {
     List(data?: ApiTypes.Admins.List): Promise<MyResponseType> {
       return request('admin/admins/list', { data });
@@ -14,6 +31,26 @@ export const Apis = {
     },
     Delete(data: ApiTypes.Admins.Delete): Promise<MyResponseType> {
       return request('admin/admins/delete', { data });
+    },
+    Select(): Promise<MyResponseType> {
+      return request('admin/admins/select', {});
+    },
+  },
+  Agents: {
+    List(data?: ApiTypes.Agents.List): Promise<MyResponseType> {
+      return request('admin/agents/list', { data });
+    },
+    Store(data: ApiTypes.Agents.Store): Promise<MyResponseType> {
+      return request('admin/agents/store', { data });
+    },
+    Update(data: ApiTypes.Agents.Update): Promise<MyResponseType> {
+      return request('admin/agents/update', { data });
+    },
+    Delete(data: ApiTypes.Agents.Delete): Promise<MyResponseType> {
+      return request('admin/agents/delete', { data });
+    },
+    Select(): Promise<MyResponseType> {
+      return request('admin/agents/select', {});
     },
   },
   Auth: {
@@ -35,6 +72,12 @@ export const Apis = {
     PreUpload(data: ApiTypes.Auth.PreUpload): Promise<MyResponseType> {
       return request('admin/auth/pre_upload', { data });
     },
+    TemporaryUrl(data: ApiTypes.Auth.TemporaryUrl): Promise<MyResponseType> {
+      return request('admin/auth/temporary_url', { data });
+    },
+    GetBaseData(): Promise<MyResponseType> {
+      return request('admin/auth/get_base_data', {});
+    },
   },
   Companies: {
     List(data?: ApiTypes.Companies.List): Promise<MyResponseType> {
@@ -46,18 +89,6 @@ export const Apis = {
     Update(data: ApiTypes.Companies.Update): Promise<MyResponseType> {
       return request('admin/companies/update', { data });
     },
-    Move(data: ApiTypes.Companies.Move): Promise<MyResponseType> {
-      return request('admin/companies/move', { data });
-    },
-    Show(data: ApiTypes.Companies.Show): Promise<MyResponseType> {
-      return request('admin/companies/show', { data });
-    },
-    SoftDelete(data: ApiTypes.Companies.SoftDelete): Promise<MyResponseType> {
-      return request('admin/companies/soft_delete', { data });
-    },
-    Restore(data: ApiTypes.Companies.Restore): Promise<MyResponseType> {
-      return request('admin/companies/restore', { data });
-    },
     Delete(data: ApiTypes.Companies.Delete): Promise<MyResponseType> {
       return request('admin/companies/delete', { data });
     },
@@ -65,50 +96,135 @@ export const Apis = {
       return request('admin/companies/select', { data });
     },
   },
-  CompanyEmployees: {
-    List(data?: ApiTypes.CompanyEmployees.List): Promise<MyResponseType> {
-      return request('admin/company_employees/list', { data });
+  CompanyAccountLogs: {
+    List(data?: ApiTypes.CompanyAccountLogs.List): Promise<MyResponseType> {
+      return request('admin/company_account_logs/list', { data });
     },
-    Store(data: ApiTypes.CompanyEmployees.Store): Promise<MyResponseType> {
-      return request('admin/company_employees/store', { data });
+    Store(data: ApiTypes.CompanyAccountLogs.Store): Promise<MyResponseType> {
+      return request('admin/company_account_logs/store', { data });
     },
-    Update(data: ApiTypes.CompanyEmployees.Update): Promise<MyResponseType> {
-      return request('admin/company_employees/update', { data });
-    },
-    Show(data: ApiTypes.CompanyEmployees.Show): Promise<MyResponseType> {
-      return request('admin/company_employees/show', { data });
-    },
-    SoftDelete(data: ApiTypes.CompanyEmployees.SoftDelete): Promise<MyResponseType> {
-      return request('admin/company_employees/soft_delete', { data });
-    },
-    Restore(data: ApiTypes.CompanyEmployees.Restore): Promise<MyResponseType> {
-      return request('admin/company_employees/restore', { data });
-    },
-    Delete(data: ApiTypes.CompanyEmployees.Delete): Promise<MyResponseType> {
-      return request('admin/company_employees/delete', { data });
+    Delete(data: ApiTypes.CompanyAccountLogs.Delete): Promise<MyResponseType> {
+      return request('admin/company_account_logs/delete', { data });
     },
   },
-  Dormigories: {
-    List(data?: ApiTypes.Dormigories.List): Promise<MyResponseType> {
-      return request('admin/dormigories/list', { data });
+  CompanyTemplates: {
+    List(data?: ApiTypes.CompanyTemplates.List): Promise<MyResponseType> {
+      return request('admin/company_templates/list', { data });
     },
-    Store(data: ApiTypes.Dormigories.Store): Promise<MyResponseType> {
-      return request('admin/dormigories/store', { data });
+    Store(data: ApiTypes.CompanyTemplates.Store): Promise<MyResponseType> {
+      return request('admin/company_templates/store', { data });
     },
-    Update(data: ApiTypes.Dormigories.Update): Promise<MyResponseType> {
-      return request('admin/dormigories/update', { data });
+    Update(data: ApiTypes.CompanyTemplates.Update): Promise<MyResponseType> {
+      return request('admin/company_templates/update', { data });
     },
-    Show(data: ApiTypes.Dormigories.Show): Promise<MyResponseType> {
-      return request('admin/dormigories/show', { data });
+    Show(data: ApiTypes.CompanyTemplates.Show): Promise<MyResponseType> {
+      return request('admin/company_templates/show', { data });
     },
-    SoftDelete(data: ApiTypes.Dormigories.SoftDelete): Promise<MyResponseType> {
-      return request('admin/dormigories/soft_delete', { data });
+    Delete(data: ApiTypes.CompanyTemplates.Delete): Promise<MyResponseType> {
+      return request('admin/company_templates/delete', { data });
     },
-    Restore(data: ApiTypes.Dormigories.Restore): Promise<MyResponseType> {
-      return request('admin/dormigories/restore', { data });
+  },
+  FlowMoneys: {
+    List(data?: ApiTypes.FlowMoneys.List): Promise<MyResponseType> {
+      return request('admin/flow_moneys/list', { data });
     },
-    Delete(data: ApiTypes.Dormigories.Delete): Promise<MyResponseType> {
-      return request('admin/dormigories/delete', { data });
+    SelectCompaniesTemplate(data?: ApiTypes.FlowMoneys.SelectCompaniesTemplate): Promise<MyResponseType> {
+      return request('admin/flow_moneys/select_companies_template', { data });
+    },
+    GetStocksByCompanyId(data: ApiTypes.FlowMoneys.GetStocksByCompanyId): Promise<MyResponseType> {
+      return request('admin/flow_moneys/get_stocks_by_company_id', { data });
+    },
+    Store(data: ApiTypes.FlowMoneys.Store): Promise<MyResponseType> {
+      return request('admin/flow_moneys/store', { data });
+    },
+    FlowMoneyDailyDetails(data: ApiTypes.FlowMoneys.FlowMoneyDailyDetails): Promise<MyResponseType> {
+      return request('admin/flow_moneys/flow_money_daily_details', { data });
+    },
+    FullFlowMoneyDailyDetails(data?: ApiTypes.FlowMoneys.FullFlowMoneyDailyDetails): Promise<MyResponseType> {
+      return request('admin/flow_moneys/full_flow_money_daily_details', { data });
+    },
+    Delete(data: ApiTypes.FlowMoneys.Delete): Promise<MyResponseType> {
+      return request('admin/flow_moneys/delete', { data });
+    },
+    InProgress(data?: ApiTypes.FlowMoneys.InProgress): Promise<MyResponseType> {
+      return request('admin/flow_moneys/in_progress', { data });
+    },
+    Audit(data: ApiTypes.FlowMoneys.Audit): Promise<MyResponseType> {
+      return request('admin/flow_moneys/audit', { data });
+    },
+  },
+  InBillInvoices: {
+    List(data: ApiTypes.InBillInvoices.List): Promise<MyResponseType> {
+      return request('admin/in_bill_invoices/list', { data });
+    },
+    Store(data: ApiTypes.InBillInvoices.Store): Promise<MyResponseType> {
+      return request('admin/in_bill_invoices/store', { data });
+    },
+    Update(data: ApiTypes.InBillInvoices.Update): Promise<MyResponseType> {
+      return request('admin/in_bill_invoices/update', { data });
+    },
+    Delete(data: ApiTypes.InBillInvoices.Delete): Promise<MyResponseType> {
+      return request('admin/in_bill_invoices/delete', { data });
+    },
+  },
+  InBills: {
+    List(data?: ApiTypes.InBills.List): Promise<MyResponseType> {
+      return request('admin/in_bills/list', { data });
+    },
+    Store(data: ApiTypes.InBills.Store): Promise<MyResponseType> {
+      return request('admin/in_bills/store', { data });
+    },
+    Show(data: ApiTypes.InBills.Show): Promise<MyResponseType> {
+      return request('admin/in_bills/show', { data });
+    },
+    Delete(data: ApiTypes.InBills.Delete): Promise<MyResponseType> {
+      return request('admin/in_bills/delete', { data });
+    },
+    GetSyncedFlowMoney(data: ApiTypes.InBills.GetSyncedFlowMoney): Promise<MyResponseType> {
+      return request('admin/in_bills/get_synced_flow_money', { data });
+    },
+    SyncFlowMoney(data: ApiTypes.InBills.SyncFlowMoney): Promise<MyResponseType> {
+      return request('admin/in_bills/sync_flow_money', { data });
+    },
+    GetSaleSyncedFlowMoney(data: ApiTypes.InBills.GetSaleSyncedFlowMoney): Promise<MyResponseType> {
+      return request('admin/in_bills/get_sale_synced_flow_money', { data });
+    },
+    SyncSaleFlowMoney(data: ApiTypes.InBills.SyncSaleFlowMoney): Promise<MyResponseType> {
+      return request('admin/in_bills/sync_sale_flow_money', { data });
+    },
+  },
+  InvoiceCates: {
+    List(data?: ApiTypes.InvoiceCates.List): Promise<MyResponseType> {
+      return request('admin/invoice_cates/list', { data });
+    },
+    Store(data: ApiTypes.InvoiceCates.Store): Promise<MyResponseType> {
+      return request('admin/invoice_cates/store', { data });
+    },
+    Update(data: ApiTypes.InvoiceCates.Update): Promise<MyResponseType> {
+      return request('admin/invoice_cates/update', { data });
+    },
+    Delete(data: ApiTypes.InvoiceCates.Delete): Promise<MyResponseType> {
+      return request('admin/invoice_cates/delete', { data });
+    },
+  },
+  Stocks: {
+    List(data?: ApiTypes.Stocks.List): Promise<MyResponseType> {
+      return request('admin/stocks/list', { data });
+    },
+    Store(data: ApiTypes.Stocks.Store): Promise<MyResponseType> {
+      return request('admin/stocks/store', { data });
+    },
+    Update(data: ApiTypes.Stocks.Update): Promise<MyResponseType> {
+      return request('admin/stocks/update', { data });
+    },
+    Show(data: ApiTypes.Stocks.Show): Promise<MyResponseType> {
+      return request('admin/stocks/show', { data });
+    },
+    Delete(data: ApiTypes.Stocks.Delete): Promise<MyResponseType> {
+      return request('admin/stocks/delete', { data });
+    },
+    Select(): Promise<MyResponseType> {
+      return request('admin/stocks/select', {});
     },
   },
   SysPermissions: {
@@ -155,6 +271,26 @@ export const Apis = {
     },
     SetPermissions(data: ApiTypes.SysRoles.SetPermissions): Promise<MyResponseType> {
       return request('admin/sys_roles/set_permissions', { data });
+    },
+  },
+  Warehouses: {
+    List(data?: ApiTypes.Warehouses.List): Promise<MyResponseType> {
+      return request('admin/warehouses/list', { data });
+    },
+    Store(data: ApiTypes.Warehouses.Store): Promise<MyResponseType> {
+      return request('admin/warehouses/store', { data });
+    },
+    Update(data: ApiTypes.Warehouses.Update): Promise<MyResponseType> {
+      return request('admin/warehouses/update', { data });
+    },
+    Show(data: ApiTypes.Warehouses.Show): Promise<MyResponseType> {
+      return request('admin/warehouses/show', { data });
+    },
+    Delete(data: ApiTypes.Warehouses.Delete): Promise<MyResponseType> {
+      return request('admin/warehouses/delete', { data });
+    },
+    Select(): Promise<MyResponseType> {
+      return request('admin/warehouses/select', {});
     },
   },
 }

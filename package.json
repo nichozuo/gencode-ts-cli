@@ -1,6 +1,6 @@
 {
   "name": "@nichozuo/gencode-ts-cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A CLI tool to generate TypeScript code from OpenAPI specification",
   "main": "dist/index.js",
   "bin": {
