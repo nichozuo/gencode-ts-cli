@@ -28,7 +28,7 @@ export const Apis = {
 `,H({config:t,configDir:i,fileName:"ApiTypes.d.ts",fileContent:n})}function _e(o){let{openapi:e,config:t,configDir:i}=o,n=e["x-enum"];if(n==null)return;let r="";for(let[s,l]of Object.entries(n)){if(!l){console.warn(`\u8B66\u544A: \u679A\u4E3E ${s} \u7684schema\u4E3A\u7A7A`);continue}let{title:a,properties:u}=l;if(!a||!u){console.warn(`\u8B66\u544A: \u679A\u4E3E ${s} \u7F3A\u5C11title\u6216properties\u5C5E\u6027`);continue}r+=`// ${a}
 `,r+=`export const ${s} = {
 `,u.forEach(c=>{if(!c||!c.value){console.warn(`\u8B66\u544A: \u679A\u4E3E ${s} \u4E2D\u5B58\u5728\u65E0\u6548\u7684item`);return}let h=c.value.replace(/\\/g,"\\\\");r+=`  '${h}': ${JSON.stringify({text:c.label||c.value,color:c.color||"#bfbfbf",value:c.value})}, 
-`,r=r.replace('"',"'")}),r+=`};
+`,r=r.replace(/"/g,"'")}),r+=`};
 
 `}H({config:t,configDir:i,fileName:"Enums.ts",fileContent:r})}function Oe(o,e){let t="",i="  ".repeat(e);for(let[n,r]of Object.entries(o))if(r.path){r.tags.shift();let s=["ApiTypes",...r.tags].join("."),l=r.params.length>0,a=r.isDownload?"responseType: 'blob',":"";if(l){let u=r.required.length>0?"":"?";t+=`${i}${n}(data${u}: ${s}): Promise<MyResponseType> {
 `,t+=`${i}  return request('${r.path}', { ${a}data });

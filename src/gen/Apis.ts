@@ -103,8 +103,22 @@ export const Apis = {
     Store(data: ApiTypes.CompanyAccountLogs.Store): Promise<MyResponseType> {
       return request('admin/company_account_logs/store', { data });
     },
-    Delete(data: ApiTypes.CompanyAccountLogs.Delete): Promise<MyResponseType> {
-      return request('admin/company_account_logs/delete', { data });
+    AddPurchaseInvoice(data: ApiTypes.CompanyAccountLogs.AddPurchaseInvoice): Promise<MyResponseType> {
+      return request('admin/company_account_logs/add_purchase_invoice', { data });
+    },
+    AddPurchaseFund(data: ApiTypes.CompanyAccountLogs.AddPurchaseFund): Promise<MyResponseType> {
+      return request('admin/company_account_logs/add_purchase_fund', { data });
+    },
+    AddSaleInvoice(data: ApiTypes.CompanyAccountLogs.AddSaleInvoice): Promise<MyResponseType> {
+      return request('admin/company_account_logs/add_sale_invoice', { data });
+    },
+    AddSaleFund(data: ApiTypes.CompanyAccountLogs.AddSaleFund): Promise<MyResponseType> {
+      return request('admin/company_account_logs/add_sale_fund', { data });
+    },
+  },
+  CompanyAccounts: {
+    List(data?: ApiTypes.CompanyAccounts.List): Promise<MyResponseType> {
+      return request('admin/company_accounts/list', { data });
     },
   },
   CompanyTemplates: {
@@ -153,20 +167,6 @@ export const Apis = {
       return request('admin/flow_moneys/audit', { data });
     },
   },
-  InBillInvoices: {
-    List(data: ApiTypes.InBillInvoices.List): Promise<MyResponseType> {
-      return request('admin/in_bill_invoices/list', { data });
-    },
-    Store(data: ApiTypes.InBillInvoices.Store): Promise<MyResponseType> {
-      return request('admin/in_bill_invoices/store', { data });
-    },
-    Update(data: ApiTypes.InBillInvoices.Update): Promise<MyResponseType> {
-      return request('admin/in_bill_invoices/update', { data });
-    },
-    Delete(data: ApiTypes.InBillInvoices.Delete): Promise<MyResponseType> {
-      return request('admin/in_bill_invoices/delete', { data });
-    },
-  },
   InBills: {
     List(data?: ApiTypes.InBills.List): Promise<MyResponseType> {
       return request('admin/in_bills/list', { data });
@@ -179,18 +179,6 @@ export const Apis = {
     },
     Delete(data: ApiTypes.InBills.Delete): Promise<MyResponseType> {
       return request('admin/in_bills/delete', { data });
-    },
-    GetSyncedFlowMoney(data: ApiTypes.InBills.GetSyncedFlowMoney): Promise<MyResponseType> {
-      return request('admin/in_bills/get_synced_flow_money', { data });
-    },
-    SyncFlowMoney(data: ApiTypes.InBills.SyncFlowMoney): Promise<MyResponseType> {
-      return request('admin/in_bills/sync_flow_money', { data });
-    },
-    GetSaleSyncedFlowMoney(data: ApiTypes.InBills.GetSaleSyncedFlowMoney): Promise<MyResponseType> {
-      return request('admin/in_bills/get_sale_synced_flow_money', { data });
-    },
-    SyncSaleFlowMoney(data: ApiTypes.InBills.SyncSaleFlowMoney): Promise<MyResponseType> {
-      return request('admin/in_bills/sync_sale_flow_money', { data });
     },
   },
   InvoiceCates: {

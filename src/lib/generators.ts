@@ -81,7 +81,7 @@ export function createEnumsFile(params: {
                 color: item.color || '#bfbfbf',
                 value: item.value,
             })}, \n`;
-            data = data.replace('"','\'')
+            data = data.replace(/"/g, "'")
         });
         data += `};\n\n`;
     }

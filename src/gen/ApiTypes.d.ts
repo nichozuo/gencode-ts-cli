@@ -103,7 +103,7 @@ declare namespace ApiTypes {
     type Store = {
       "admins_id": number; // 所属管理员ID,[ref:admins] 
       "agents_id": number; // 所属代理商ID,[ref:agents] 
-      "type"?: string; // 类型,[enum:CompaniesTypeEnum] 
+      "type": string; // 类型,[enum:CompaniesTypeEnum] 
       "name": string; // 公司名称 
       "sort_name": string; // - 
       "sn": string; // 公司唯一标识 
@@ -180,17 +180,42 @@ declare namespace ApiTypes {
   }
   namespace CompanyAccountLogs {
     type List = {
-      "company_accounts_id"?: number; // 所属账户id,[ref:company_accounts] 
+      "in_bills_id"?: number; // 入库单id,[ref:in_bills] 
+      "type"?: string; // 操作类型,[enum:CompanyAccountLogsTypeEnum] 
+      "method"?: string; // 操作方法,[enum:CompanyAccountLogsMethodEnum] 
+      "company_accounts_id"?: number; // 公司id,[ref:companies] 
     };
     type Store = {
-      "company_accounts_id": number; // 所属账户id,[ref:company_accounts] 
       "type": string; // 操作类型,[enum:CompanyAccountLogsTypeEnum] 
-      "from_companies_id": number; // 来源公司id,[ref:companies] 
-      "to_companies_id": number; // 目标公司id,[ref:companies] 
+      "method": string; // 操作方法,[enum:CompanyAccountLogsMethodEnum] 
+      "from_companies_id": number; // 转出公司id,[ref:companies] 
+      "to_companies_id": number; // 转入公司id,[ref:companies] 
       "change_amount": number; // 变更金额 
+      "attachment"?: string; // 附件 
     };
-    type Delete = {
-      "id": number; // id 
+    type AddPurchaseInvoice = {
+      "in_bills_id": number; // 入库单IDid,[ref:in_bills] 
+      "invoice_images"?: string[]; // 附件 
+    };
+    type AddPurchaseFund = {
+      "in_bills_id": number; // 入库单IDid,[ref:in_bills] 
+      "amount": number; // 金额 
+      "attachment"?: string[]; // 附件 
+    };
+    type AddSaleInvoice = {
+      "in_bills_id": number; // 入库单IDid,[ref:in_bills] 
+      "invoice_images"?: string[]; // 附件 
+    };
+    type AddSaleFund = {
+      "in_bills_id": number; // 入库单IDid,[ref:in_bills] 
+      "amount": number; // 金额 
+      "attachment"?: string[]; // 附件 
+    };
+  }
+  namespace CompanyAccounts {
+    type List = {
+      "company_name"?: string; // 公司名称,[ref:companies] 
+      "company_type"?: string; // 类型,[enum:CompaniesTypeEnum] 
     };
   }
   namespace CompanyTemplates {
@@ -262,24 +287,6 @@ declare namespace ApiTypes {
       "description"?: string; // - 
     };
   }
-  namespace InBillInvoices {
-    type List = {
-      "in_bills_id": number; // 入库单id,[ref:in_bills] 
-    };
-    type Store = {
-      "in_bills_id": number; // 入库单id,[ref:in_bills] 
-      "invoice_images"?: string[]; // 发票图片 
-    };
-    type Update = {
-      "id": number; // id 
-      "in_bills_id": number; // 入库单id,[ref:in_bills] 
-      "total_amount": number; // 发票总金额 
-      "invoice_images"?: string[]; // 发票图片 
-    };
-    type Delete = {
-      "id": number; // id 
-    };
-  }
   namespace InBills {
     type List = {
       "name"?: string; // 名称 
@@ -308,20 +315,6 @@ declare namespace ApiTypes {
     };
     type Delete = {
       "id": number; // id 
-    };
-    type GetSyncedFlowMoney = {
-      "id": number; // id 
-    };
-    type SyncFlowMoney = {
-      "id": number; // id 
-      "flow_moneys_ids"?: string[]; // 资金流id数组（允许空数组以解绑全部） 
-    };
-    type GetSaleSyncedFlowMoney = {
-      "id": number; // id 
-    };
-    type SyncSaleFlowMoney = {
-      "id": number; // id 
-      "flow_moneys_ids"?: string[]; // 资金流id数组（允许空数组以解绑全部） 
     };
   }
   namespace InvoiceCates {
